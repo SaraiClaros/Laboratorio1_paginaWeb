@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+    <h1>Escuela de Aprendizaje</h1>
+    <p>"Donde aprender es un viaje emocionante"</p>
+</header>
+
+<section class="welcome-section">
+    <h2>¡Bienvenidos al área del conocimiento!</h2>
+    <p>Descubre un mundo donde aprender es una aventura llena de diversión. Cada curso está diseñado para hacerte reír, explorar y crecer. ¡Ven y sé parte de esta experiencia inolvidable!</p>
+</section>
+
+<div class="intro-section">
+    <h2>¡Explora nuestros cursos y descubre tu potencial!</h2>
+    <p>En nuestra escuela, ofrecemos una variedad de cursos diseñados para despertar tu curiosidad y potenciar tus habilidades:</p>
+    <ul>
+        <li><strong>Ciencias Naturales:</strong> Aprende sobre el mundo que te rodea a través de experimentos y proyectos interactivos.</li>
+        <li><strong>Lenguaje:</strong> Mejora tu expresión escrita y oral mientras desarrollas tu imaginación contando historias únicas.</li>
+        <li><strong>Matemáticas:</strong> Descubre la magia de los números y desarrolla habilidades de resolución de problemas.</li>
+        <li><strong>Arte y Creatividad:</strong> Explora tu lado artístico y crea obras que reflejen tu imaginación y talento.</li>
+    </ul>
+    <p>¡Inscríbete y comienza tu viaje de aprendizaje hoy!</p>
+</div>
+
+
+<div class="cards">
+    <div class="card">
+        <img src="{{ url_for('static', filename='imagenes/ciencia.jpeg') }}" alt="Ciencia">
+        <h3>Ciencias Naturales</h3>
+        <p>¿Sabías que puedes hacer un volcán en casa? ¡Te enseñamos cómo!</p>
+        <a href="#">Explorar</a>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='imagenes/lenguje.jpeg') }}" alt="Lenguaje">
+        <h3>Lenguaje</h3>
+        <p>¡Aprenderemos cantando, pintando y contando historias increíbles!</p>
+        <a href="#">Explorar</a>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='imagenes/matematicas.jpeg') }}" alt="Matemáticas">
+        <h3>Matemáticas</h3>
+        <p>Los números también tienen magia. ¡Ven y descúbrela con nosotros!</p>
+        <a href="#">Explorar</a>
+    </div>
+    <div class="card">
+        <img src="{{ url_for('static', filename='imagenes/arte.jpeg') }}" alt="Arte y Creatividad">
+        <h3>Arte y Creatividad</h3>
+        <p>¡Conviértete en un artista y llena el mundo de color y vida!</p>
+        <a href="#">Explorar</a>
+    </div>
+</div>
+
+<style>
+   
+    body, html {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f1f1f1;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        width: 100%; 
+        height: 100%; 
+    }
+
+    header {
+        background-color: #3a5bb7;
+        color: white;
+        padding: 50px 20px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+    }
+
+    header h1 {
+        font-size: 3rem;
+        margin: 0;
+        font-weight: bold;
+    }
+
+    header p {
+        font-size: 1.5rem;
+        font-style: italic;
+    }
+
+    .welcome-section {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        margin: 40px auto;
+        max-width: 100%; 
+        text-align: center;
+    }
+
+    .welcome-section h2 {
+        color: #3a5db7;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .intro-section {
+        background-color: #f9fafc;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 40px auto;
+        text-align: center;
+        color: #333;
+    }
+
+    .intro-section h2 {
+        font-size: 2.5rem;
+        color: #0d0d0e;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .intro-section p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        color: #555;
+    }
+
+ 
+    .cards {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        gap: 20px;
+        flex-wrap: nowrap; 
+        padding: 0 10px; 
+        width: 100%; 
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 23%; 
+        padding: 10px;
+        text-align: center;
+        transition: transform 0.3s ease;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+    .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .card h3 {
+        color: #4258a2; 
+        font-size: 24px;
+        margin-top: 15px;
+    }
+
+    .card p {
+        color: #555;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .card a {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 10px;
+        background-color: #4d6bcc; 
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .card a:hover {
+        background-color: #4d6bcc; 
+    }
+
+   
+    @media (max-width: 768px) {
+        .cards {
+            flex-direction: column;
+            align-items: center;
+            padding: 0; 
+        }
+
+        .card {
+            width: 80%;
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+{% endblock %}
+
+

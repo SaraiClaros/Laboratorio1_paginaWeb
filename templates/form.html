@@ -7,7 +7,8 @@
             <div class="titulo-container">
                 <h2 class="titulo-centrado">Registrar Estudiante</h2>
             </div>
-            <form method="POST" action="/formulario" class="formulario-custom">
+            <!-- Vincular la función mostrarAlerta() al evento de envío -->
+            <form method="POST" action="/formulario" class="formulario-custom" onsubmit="return mostrarAlerta()">
                 <div class="mb-4">
                     <label for="nombre" class="form-label">Nombre:</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
@@ -30,8 +31,15 @@
     </div>
 </div>
 
+<script>
+    function mostrarAlerta() {
+        alert('¡Se han guardado tus datos exitosamente!');
+        return true; // Permite que el formulario se envíe después de mostrar la alerta
+    }
+</script>
+
 <style>
-   
+    /* Estilos personalizados */
     .titulo-container {
         width: 90%; 
         max-width: 700px; 
@@ -54,7 +62,6 @@
         text-align: center; 
     }
 
-    
     .formulario-custom {
         background-color: #f4f7fa;
         border-radius: 8px;
@@ -109,5 +116,3 @@
     }
 </style>
 {% endblock %}
-
-

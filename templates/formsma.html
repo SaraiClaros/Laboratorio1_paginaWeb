@@ -7,7 +7,7 @@
             <div class="titulo-container">
                 <h2 class="titulo-centrado">Registrar Docentes</h2>
             </div>
-            <form method="POST" action="/formulario_do" class="formulario-custom">
+            <form method="POST" action="/formulario_do" class="formulario-custom" onsubmit="return mostrarAlerta()">
                 <div class="mb-4">
                     <label for="nombre" class="form-label">Nombre:</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
@@ -29,6 +29,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function mostrarAlerta() {
+        alert('¡Se han guardado tus datos exitosamente!');
+        return true; 
+    }
+</script>
 
 <style>
     .titulo-container {

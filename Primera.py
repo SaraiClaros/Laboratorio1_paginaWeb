@@ -1,11 +1,16 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = 'clave_secreta'
 
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
+
+@app.route('/matematica', methods=['GET'])
+def matematica():
+    return render_template('retos_matematicas.html')
 
 @app.route('/formulario', methods=['GET', 'POST'])
 def formulario():
@@ -15,16 +20,20 @@ def formulario():
         telefono = request.form['telefono']
         curso = request.form['curso']
 
-        conn = sqlite3.connect('database.db')
-        cursor = conn.cursor()
+        try:
+            conn = sqlite3.connect('database.db')
+            cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO Estudiantes (nombre, correo, telefono, curso) VALUES (?, ?, ?, ?)", 
-                       (nombre, correo, telefono, curso))
-        conn.commit()
-        conn.close()
+            cursor.execute("INSERT INTO Estudiantes (nombre, correo, telefono, curso) VALUES (?, ?, ?, ?)", 
+                           (nombre, correo, telefono, curso))
+            conn.commit()
+            flash('¡Estudiante registrado exitosamente!', 'success')
+        except Exception as e:
+            flash(f'Error al guardar los datos: {e}', 'error')
+        finally:
+            conn.close()
 
-        print("Datos guardados en la tabla Estudiantes")
-        return redirect(url_for('formulario'))  
+        return redirect(url_for('formulario'))
 
     return render_template('form.html')
 
@@ -36,20 +45,16 @@ def formulario_do():
         telefono = request.form['telefono']
         especialidad = request.form['especialidad']
 
-        # Mostrar los datos recibidos para depuración
-        print("Datos del docente recibidos:", nombre, correo, telefono, especialidad)
-
         try:
             conn = sqlite3.connect('database.db')
             cursor = conn.cursor()
 
-            # Inserción en la tabla Docentes
             cursor.execute("INSERT INTO Docentes (nombre, correo, telefono, especialidad) VALUES (?, ?, ?, ?)", 
                            (nombre, correo, telefono, especialidad))
             conn.commit()
-            print("Datos del docente guardados correctamente.")
+            flash('¡Docente registrado exitosamente!', 'success')
         except Exception as e:
-            print(f"Error al guardar los datos: {e}")
+            flash(f'Error al guardar los datos: {e}', 'error')
         finally:
             conn.close()
 
@@ -65,7 +70,6 @@ def init_db():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    # Crear tabla de Estudiantes
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Estudiantes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -76,7 +80,6 @@ def init_db():
         )
     ''')
 
-    # Crear tabla de Docentes
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Docentes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -12,6 +12,18 @@ def home():
 def matematica():
     return render_template('retos_matematicas.html')
 
+@app.route('/lenguaje', methods=['GET'])
+def lenguaje():
+    return render_template('restos_lenguaje.html')
+
+@app.route('/arte', methods=['GET'])
+def arte():
+    return render_template('retos_arte.html')
+
+@app.route('/ciencia', methods=['GET'])
+def ciencia():
+    return render_template('retos_ciencia.html')
+
 @app.route('/formulario', methods=['GET', 'POST'])
 def formulario():
     if request.method == 'POST':

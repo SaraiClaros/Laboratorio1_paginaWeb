@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="titulo-centrado">¡Desafíos Científicos!</h2>
+    <div id="reto-container" class="reto-container">
+        <p id="reto" class="reto-pregunta">¿Listo para empezar?</p>
+        <input type="text" id="respuesta" class="form-control input-estilo" placeholder="Escribe tu respuesta">
+        <button id="comprobar-btn" class="btn-comprobar mt-3" onclick="comprobarRespuesta()">Comprobar</button>
+        <button id="siguiente-btn" class="btn-siguiente mt-3" onclick="siguienteReto()" disabled>Siguiente Desafío</button>
+        <p id="mensaje" class="mensaje"></p>
+    </div>
+</div>
+
+<script>
+    // Lista de retos científicos
+    const retos = [
+        { pregunta: "¿Cuál es el gas que respiramos para vivir?", respuesta: "Oxígeno" },
+        { pregunta: "¿Cuántos planetas tiene el Sistema Solar?", respuesta: "8" },
+        { pregunta: "¿Cuál es la fórmula química del agua?", respuesta: "H2O" },
+        { pregunta: "¿Qué organismo es conocido por producir su propio alimento a través de la fotosíntesis?", respuesta: "Planta" },
+        { pregunta: "¿Qué es la materia?", respuesta: "Todo lo que tiene masa y volumen" },
+    ];
+
+    let retoActual = 0;
+
+    function mostrarReto() {
+        document.getElementById("reto").textContent = retos[retoActual].pregunta;
+        document.getElementById("respuesta").value = "";
+        document.getElementById("mensaje").textContent = "";
+        document.getElementById("siguiente-btn").disabled = true;
+    }
+
+    function comprobarRespuesta() {
+        const respuestaUsuario = document.getElementById("respuesta").value.trim();
+        const mensaje = document.getElementById("mensaje");
+        if (respuestaUsuario.toLowerCase() === retos[retoActual].respuesta.toLowerCase()) {
+            mensaje.textContent = "¡Correcto! 🎉";
+            mensaje.style.color = "green";
+            document.getElementById("siguiente-btn").disabled = false;
+        } else {
+            mensaje.textContent = "Incorrecto. Intenta de nuevo. ❌";
+            mensaje.style.color = "red";
+        }
+    }
+
+    function siguienteReto() {
+        retoActual++;
+        if (retoActual < retos.length) {
+            mostrarReto();
+        } else {
+            document.getElementById("reto").textContent = "¡Felicidades! Has completado todos los desafíos científicos. 🎉";
+            document.getElementById("respuesta").style.display = "none";
+            document.getElementById("comprobar-btn").style.display = "none";
+            document.getElementById("siguiente-btn").style.display = "none";
+        }
+    }
+
+    // Mostrar el primer reto al cargar la página
+    document.addEventListener("DOMContentLoaded", mostrarReto);
+</script>
+
+<style>
+    .reto-container {
+        background-color: #f2f6fc;
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+        text-align: center;
+    }
+
+    .reto-pregunta {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .mensaje {
+        font-size: 1.2rem;
+        margin-top: 15px;
+    }
+
+    .btn-siguiente {
+        background-color: #28a745; /* Verde oscuro */
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 1.2rem;
+        border-radius: 6px;
+        width: 200px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+        margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .btn-siguiente:hover {
+        background-color: #218838; /* Verde más oscuro */
+    }
+
+    .btn-comprobar {
+        background-color: #007bff; /* Azul */
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 1.2rem;
+        border-radius: 6px;
+        width: 200px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+        margin-top: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .btn-comprobar:hover {
+        background-color: #0056b3; /* Azul más oscuro */
+    }
+
+    .input-estilo {
+        padding: 12px;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        border: 2px solid #ddd;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        transition: border-color 0.3s ease;
+    }
+
+    .input-estilo:focus {
+        border-color: #28a745;
+        outline: none;
+    }
+
+    .titulo-centrado {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #333;
+    }
+</style>
+
+{% endblock %}
